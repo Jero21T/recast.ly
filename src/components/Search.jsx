@@ -1,6 +1,6 @@
 var Search = (props) => (
   <div className="search-bar form-inline">
-    <input className="form-control" type="text" onKeyUp={(event, stateQuery) => props.handleUserQuery(event, $('.form-control').val())}/>
+    <input className="form-control" type="text" onKeyUp={_.debounce((event, stateQuery) => props.handleUserQuery(event, $('.form-control').val()), 500)}/>
     <button className="btn hidden-sm-down" onClick ={() => props.onSearchButtonClicked($('.form-control').val())}>
       <span className="glyphicon glyphicon-search"></span>
     </button>

@@ -8,6 +8,7 @@ class App extends React.Component {
     };
   }
   
+  // search method is invoked immediatly after mount with default search query
   componentDidMount() {
     searchYouTube({query: null, max: null, key: null }, (APIvideos) => {
       this.setState({ videos: APIvideos}); 
@@ -15,27 +16,27 @@ class App extends React.Component {
     }); 
   }
   
-  onVideoEntryClicked(data) {
+  // changes the state based on the entry the user clicks on video list
+  onVideoEntryClicked(videoClicked) {
     this.setState({
-      currentVideo: data
+      currentVideo: videoClicked
     });
   }
   
+  // live searches user input in search bar with a debounce time of 500ms
   handleUserQuery(event, stateQuery) {
     this.liveSearch(stateQuery);
   }
-
-  liveSearch(text) {
-    searchYouTube({query: text, max: null, key: null }, (APIvideos) => {
-      this.setState({ videos: APIvideos}); 
-      this.setState({currentVideo: APIvideos[0]}); 
-    });
+  
+  // triggers live search after search button is clicked
+  // takes in values from input box
+  onSearchButtonClicked(userQuery) {
+    this.liveSearch(userQuery);
   }
   
-  
-  onSearchButtonClicked(userQuery) {
-    console.log(userQuery);
-    searchYouTube({query: userQuery, max: null, key: null }, (APIvideos) => {
+  // gets data from youtubes api based on query text parameter
+  liveSearch(text) {
+    searchYouTube({query: text, max: null, key: null }, (APIvideos) => {
       this.setState({ videos: APIvideos}); 
       this.setState({currentVideo: APIvideos[0]}); 
     });
