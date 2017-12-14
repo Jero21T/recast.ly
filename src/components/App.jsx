@@ -22,12 +22,14 @@ class App extends React.Component {
   }
   
   handleUserQuery(event, stateQuery) {
-    if (event.key === 'Enter') {
-      console.log(stateQuery);
-      this.setState({
-        query: stateQuery
-      });
-    }
+    this.liveSearch(stateQuery);
+  }
+
+  liveSearch(text) {
+    searchYouTube({query: text, max: null, key: null }, (APIvideos) => {
+      this.setState({ videos: APIvideos}); 
+      this.setState({currentVideo: APIvideos[0]}); 
+    });
   }
   
   
