@@ -1,5 +1,5 @@
 var VideoListEntry = (props) => (
-  <div className="video-list-entry media" onClick={props.onVidClicked.bind(null, props.video)}>
+  <div className="video-list-entry media" onClick={() => props.onVideoEntryClicked(props.video)}>
     <div className="media-left media-middle">
       <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
     </div>
@@ -20,13 +20,3 @@ VideoListEntry.propTypes = {
 // `var` declarations will only exist globally where explicitly defined
 window.VideoListEntry = VideoListEntry;
 
-
-onVideoEntryClicked(data) {
-    this.setState({
-      currentVideo: data
-    });
-  }
-  function() {
-    onVidClicked()
-  }
-  onVidClicked()
